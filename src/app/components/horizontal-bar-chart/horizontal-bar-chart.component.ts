@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-horizontal-bar-chart',
   templateUrl: './horizontal-bar-chart.component.html',
   styleUrls: ['./horizontal-bar-chart.component.css']
 })
-export class HorizontalBarChartComponent implements OnInit {
+export class HorizontalBarChartComponent implements OnInit, OnDestroy {
   public results: any[] = [
     {
       "name": "Juego#1",
@@ -26,16 +26,18 @@ export class HorizontalBarChartComponent implements OnInit {
   ];
 
   // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = true;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Juegos';
-  showYAxisLabel = true;
-  yAxisLabel = 'Votos';
+  public showXAxis = true;
+  public showYAxis = true;
+  public gradient = true;
+  public showLegend = true;
+  public showXAxisLabel = true;
+  public xAxisLabel = 'Juegos';
+  public showYAxisLabel = true;
+  public yAxisLabel = 'Votos';
 
-  colorScheme = 'nightLights';
+  public colorScheme = 'nightLights';
+
+  private interval: any;
 
   constructor() {
   }
@@ -46,6 +48,18 @@ export class HorizontalBarChartComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.interval = setInterval(() => {
+      console.log('tick');
+      const newResults = [...this.results];
+      // const newResults = this.results.slice();
+      for (const result of newResults) {
+        result.value = Math.floor((Math.random() * (100 - 1 + 25)) + 25);
+      }
+      this.results = newResults;
+    }, 2000);
   }
 
+  ngOnDestroy(): void {
+    clearInterval(this.interval);
+  }
 }
