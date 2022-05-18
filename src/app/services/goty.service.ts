@@ -18,7 +18,7 @@ export class GotyService {
 
   constructor(private http: HttpClient) { }
 
-  getGames() {
+  public getGames() {
     if (!(!!this.games.length)) {
       console.info('Http');
       return this.http.get<Game[]>(`${this.url}/api/goty`)
@@ -28,5 +28,9 @@ export class GotyService {
     }
     console.info('Cache');
     return of(this.games);
+  }
+
+  public vote(game: Game) {
+    return this.http.post(`${this.url}/api/goty/${game.id}`, {});
   }
 }
