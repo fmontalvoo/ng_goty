@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Game } from 'src/app/interfaces/game';
+import { Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { GotyService } from 'src/app/services/goty.service';
 
@@ -10,15 +10,18 @@ import { GotyService } from 'src/app/services/goty.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   public games: { name: string, value: number }[] = [];
+
+  private unsubscribe = new Subject<void>();
 
   constructor(private gs: GotyService) { }
 
   ngOnInit(): void {
     this.gs.getGOTY()
       .pipe(
+        takeUntil(this.unsubscribe),
         map(
           data =>
             data.map(({ name, votes }) => ({ name: name, value: votes }))
@@ -26,8 +29,14 @@ export class HomeComponent implements OnInit {
         )
       )
       .subscribe(response => {
+        console.log(response);
         this.games = response;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
 }
