@@ -1,0 +1,9 @@
+<div class="card bg-dark">
+    <img [src]="game.url" class="card-img-top" [alt]="game.name" height="400">
+    <div class="card-body text-center">
+        <h5 class="card-title">{{ game.name }}</h5>
+    </div>
+    <div class="card-footer text-center">
+        <button class="btn btn-outline-success" (click)="emitVote(game)">Vota</button>
+    </div>
+</div>

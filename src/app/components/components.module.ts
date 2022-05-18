@@ -7,6 +7,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { HorizontalBarChartComponent } from './horizontal-bar-chart/horizontal-bar-chart.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   imports: [
@@ -16,12 +17,14 @@ import { HorizontalBarChartComponent } from './horizontal-bar-chart/horizontal-b
     NgxChartsModule,
   ],
   exports: [
+    CardComponent,
     NavbarComponent,
-    HorizontalBarChartComponent
+    HorizontalBarChartComponent,
   ],
   declarations: [
+    CardComponent,
     NavbarComponent,
-    HorizontalBarChartComponent
+    HorizontalBarChartComponent,
   ],
 })
 export class ComponentsModule { }

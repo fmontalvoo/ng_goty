@@ -4,7 +4,18 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/data-base-dev/us-central1'
+  apiUrl: 'http://localhost:5000/data-base-dev/us-central1',
+  firebase: {
+    projectId: '',
+    appId: '',
+    databaseURL: '',
+    storageBucket: '',
+    locationId: '',
+    apiKey: '',
+    authDomain: '',
+    messagingSenderId: '',
+    measurementId: '',
+  },
 };
 
 /*
