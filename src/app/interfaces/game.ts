@@ -1,5 +1,5 @@
 export interface Game {
-    id?: number;
+    id?: string;
     url: string;
     name: string;
     votes: number;

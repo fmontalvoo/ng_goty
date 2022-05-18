@@ -21,4 +21,8 @@ export class GotyComponent implements OnInit {
     });
   }
 
+  public vote(id?: string): void {
+    console.info(id);
+  }
+
 }
