@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { Game } from '../interfaces/game';
 
@@ -31,6 +31,11 @@ export class GotyService {
   }
 
   public vote(game: Game) {
-    return this.http.post(`${this.url}/api/goty/${game.id}`, {});
+    return this.http.post(`${this.url}/api/goty/${game.id}`, {})
+      .pipe(
+        catchError(e => {
+          return of(e.error);
+        })
+      );
   }
 }
